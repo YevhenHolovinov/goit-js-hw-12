@@ -4,14 +4,14 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
+const gallery = document.querySelector('.gallery');
 
-export function renderGallery(data, tagToInsert) {
-  tagToInsert.innerHTML = markup(data);
-
+export function fetchGallery(data) {
+  gallery.insertAdjacentHTML('beforeend', markupGallery(data));
   lightbox.refresh();
 }
 
-function markup(data) {
+function markupGallery(data) {
   return data.hits
     .map(
       ({
@@ -41,4 +41,12 @@ function markup(data) {
 		`
     )
     .join('');
+}
+export function fetchLoader() {
+  gallery.insertAdjacentHTML(
+    'beforeend',
+    `<div class='loader-wrapper'>
+       <div class='loader'></div>
+    </div>`
+  );
 }
